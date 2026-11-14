@@ -20,7 +20,7 @@ An automated workflow that randomly selects a page containing extractable text f
 
 5. Gmail emails the selected page.
 
-
+<img width="1878" height="770" alt="Screenshot 2026-11-14 at 15-19-02 ▶️ Daily Book Page Email - n8n" src="https://github.com/user-attachments/assets/4426242d-d224-4e2a-83f6-2599ece127c2" />
 
 ## Technologies
 
@@ -149,6 +149,7 @@ The example workflow is scheduled for 1 PM daily using the America/Chicago timez
 
 
 \- Scanned PDFs without an extractable text layer are not supported without OCR.
+
 
 \- Previously selected pages are not tracked, so duplicates are possible.
 
