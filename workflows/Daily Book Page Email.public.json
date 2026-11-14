@@ -1,0 +1,150 @@
+﻿{
+    "name":  "Daily Book Page Email",
+    "nodes":  [
+                  {
+                      "parameters":  {
+                                         "url":  "http://pdf-reader:8000/random-page",
+                                         "options":  {
+                                                         "response":  {
+                                                                          "response":  {
+                                                                                           "responseFormat":  "json"
+                                                                                       }
+                                                                      }
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.httpRequest",
+                      "typeVersion":  4.5,
+                      "position":  [
+                                       272,
+                                       32
+                                   ],
+                      "id":  "84d072df-02f8-41fd-b3a9-00dee8dcfba1",
+                      "name":  "HTTP Request"
+                  },
+                  {
+                      "parameters":  {
+                                         "assignments":  {
+                                                             "assignments":  [
+                                                                                 {
+                                                                                     "id":  "831fb8b3-8497-4679-b2fd-e9505150e4d7",
+                                                                                     "name":  "subject",
+                                                                                     "value":  "={{ \u0027Your reading: \u0027 + $json.book + \u0027 â€” page \u0027 + $json.page }}",
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                                 {
+                                                                                     "id":  "02c233b9-0b40-4108-9c0b-eb981a6e22c6",
+                                                                                     "name":  "body",
+                                                                                     "value":  "={{ \u0027Book: \u0027 + $json.book + \u0027\\nPage: \u0027 + $json.page + \u0027 of \u0027 + $json.total_pages + \u0027\\n\\n\u0027 + $json.text }}",
+                                                                                     "type":  "string"
+                                                                                 }
+                                                                             ]
+                                                         },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.set",
+                      "typeVersion":  3.5,
+                      "position":  [
+                                       464,
+                                       32
+                                   ],
+                      "id":  "b9a943a9-6751-41f6-b463-0992df568669",
+                      "name":  "Edit Fields"
+                  },
+                  {
+                      "parameters":  {
+                                         "sendTo":  "YOUR_EMAIL_ADDRESS@example.com",
+                                         "subject":  "={{ $json.subject }}",
+                                         "emailType":  "text",
+                                         "message":  "={{ $json.body }}",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.gmail",
+                      "typeVersion":  2.2,
+                      "position":  [
+                                       688,
+                                       32
+                                   ],
+                      "id":  "7f9ecf5e-e8fc-4107-ac1e-23d2756e5e76",
+                      "name":  "Send a message",
+                      "webhookId":  "8b160045-41c6-4471-b7f1-5edeb88cecfe"
+                  },
+                  {
+                      "parameters":  {
+                                         "rule":  {
+                                                      "interval":  [
+                                                                       {
+                                                                           "triggerAtHour":  13
+                                                                       }
+                                                                   ]
+                                                  }
+                                     },
+                      "type":  "n8n-nodes-base.scheduleTrigger",
+                      "typeVersion":  1.4,
+                      "position":  [
+                                       0,
+                                       0
+                                   ],
+                      "id":  "b4936051-c4f4-4c03-ab6c-14723d076c24",
+                      "name":  "Schedule Trigger"
+                  }
+              ],
+    "pinData":  {
+
+                },
+    "connections":  {
+                        "HTTP Request":  {
+                                             "main":  [
+                                                          [
+                                                              {
+                                                                  "node":  "Edit Fields",
+                                                                  "type":  "main",
+                                                                  "index":  0
+                                                              }
+                                                          ]
+                                                      ]
+                                         },
+                        "Edit Fields":  {
+                                            "main":  [
+                                                         [
+                                                             {
+                                                                 "node":  "Send a message",
+                                                                 "type":  "main",
+                                                                 "index":  0
+                                                             }
+                                                         ]
+                                                     ]
+                                        },
+                        "Schedule Trigger":  {
+                                                 "main":  [
+                                                              [
+                                                                  {
+                                                                      "node":  "HTTP Request",
+                                                                      "type":  "main",
+                                                                      "index":  0
+                                                                  }
+                                                              ]
+                                                          ]
+                                             }
+                    },
+    "active":  true,
+    "settings":  {
+                     "executionOrder":  "v1",
+                     "binaryMode":  "separate"
+                 },
+    "versionId":  "41711a9c-2be3-4be2-9cc9-93415e96f5b0",
+    "meta":  {
+                 "templateCredsSetupCompleted":  true,
+                 "instanceId":  "d834bb23bc4d835d91d53762a7f68ef2c1f4ce8292c4e897d58fc330b1c763b1"
+             },
+    "nodeGroups":  [
+
+                   ],
+    "id":  "ppbSgRmfjlOSzJjD",
+    "tags":  [
+
+             ]
+}

@@ -1,0 +1,33 @@
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# n8n local data and databases
+.n8n/
+n8n_data/
+database.sqlite
+database.sqlite-*
+
+# PDF files and personal documents
+*.pdf
+*.docx
+*.doc
+
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Logs and temporary files
+*.log
+tmp/
+temp/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Original workflow export (contains personal information)
+workflows/Daily Book Page Email.json
